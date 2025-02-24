@@ -87,6 +87,11 @@ public class FRONT extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Lucida Handwriting", 3, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(204, 0, 153));
         jButton1.setText("Get Started");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 670, 130, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fashion Store Clothes Hangers Led Sign, Wardrobe Hanger Neon Sign, Laundry Led Light, Clothing Store Neon Light, Fashion Shop Wall Decor.jpg"))); // NOI18N
@@ -95,6 +100,12 @@ public class FRONT extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LOGIN l = new LOGIN();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

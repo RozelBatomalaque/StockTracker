@@ -35,11 +35,11 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        user_name = new javax.swing.JPasswordField();
+        login = new javax.swing.JButton();
+        register_path = new javax.swing.JLabel();
+        user_type = new javax.swing.JComboBox<>();
+        password = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,36 +75,36 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ProIcon1.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 124, -1));
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        user_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                user_nameActionPerformed(evt);
             }
         });
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 230, 30));
+        jPanel1.add(user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 230, 30));
 
-        jButton1.setBackground(new java.awt.Color(51, 0, 51));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("LOG IN");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        login.setBackground(new java.awt.Color(51, 0, 51));
+        login.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        login.setForeground(new java.awt.Color(255, 255, 255));
+        login.setText("LOG IN");
+        login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 104, 32));
+        jPanel1.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 104, 32));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabel6.setText("Don't have an account?  Register here.");
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        register_path.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        register_path.setText("Don't have an account?  Register here.");
+        register_path.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                register_pathMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
+        jPanel1.add(register_path, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 230, 30));
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 230, 30));
+        user_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
+        jPanel1.add(user_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 230, 30));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 550, 440));
 
@@ -115,20 +115,20 @@ public class LOGIN extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void user_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_user_nameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginActionPerformed
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void register_pathMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_register_pathMouseClicked
 
         REGISTRATION r = new REGISTRATION();
         r.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_register_pathMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,17 +166,17 @@ public class LOGIN extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JButton login;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JLabel register_path;
+    private javax.swing.JPasswordField user_name;
+    private javax.swing.JComboBox<String> user_type;
     // End of variables declaration//GEN-END:variables
 }
