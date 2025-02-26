@@ -5,7 +5,10 @@
  */
 package sts;
 
+import config.connectDB;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,14 +38,15 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        user_name = new javax.swing.JPasswordField();
         login = new javax.swing.JButton();
         register_path = new javax.swing.JLabel();
-        user_type = new javax.swing.JComboBox<>();
+        usertype = new javax.swing.JComboBox<>();
         password = new javax.swing.JPasswordField();
+        username = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0, 30));
@@ -75,13 +79,6 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ProIcon1.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 124, -1));
 
-        user_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                user_nameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 230, 30));
-
         login.setBackground(new java.awt.Color(51, 0, 51));
         login.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,9 +99,10 @@ public class LOGIN extends javax.swing.JFrame {
         });
         jPanel1.add(register_path, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
 
-        user_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
-        jPanel1.add(user_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 230, 30));
+        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
+        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 230, 30));
         jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 230, 30));
+        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 550, 440));
 
@@ -113,14 +111,45 @@ public class LOGIN extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 570));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void user_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_user_nameActionPerformed
-
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
+      
+       String user_name = username.getText().trim();
+    String Password = password.getText().trim();
+    connectDB connect = new connectDB();
+
+    if (user_name.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter your username!", "Error", JOptionPane.WARNING_MESSAGE);
+    } else if (Password.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter your password!", "Error", JOptionPane.WARNING_MESSAGE);
+    } else {
+        try {
+            String userType = connect.validateLogin(user_name, Password);
+            if (userType != null) {
+                JOptionPane.showMessageDialog(null, "Login Successful!");
+
+                switch (userType) {
+                    case "Manager":
+                        new ManagerDashboard().setVisible(true);
+                        break;
+                    case "Sales Clerk":
+                        new SalesClerkDashboard().setVisible(true);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Unknown user type: " + userType, "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+        
     }//GEN-LAST:event_loginActionPerformed
 
     private void register_pathMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_register_pathMouseClicked
@@ -176,7 +205,7 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel register_path;
-    private javax.swing.JPasswordField user_name;
-    private javax.swing.JComboBox<String> user_type;
+    private javax.swing.JTextField username;
+    private javax.swing.JComboBox<String> usertype;
     // End of variables declaration//GEN-END:variables
 }
