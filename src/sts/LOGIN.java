@@ -35,12 +35,10 @@ public class LOGIN extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         login = new javax.swing.JButton();
         register_path = new javax.swing.JLabel();
-        usertype = new javax.swing.JComboBox<>();
         password = new javax.swing.JPasswordField();
         username = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -62,12 +60,7 @@ public class LOGIN extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
         jLabel2.setText("Password:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel3.setText("User Type:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 102));
@@ -98,10 +91,7 @@ public class LOGIN extends javax.swing.JFrame {
             }
         });
         jPanel1.add(register_path, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
-
-        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
-        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 230, 30));
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 230, 30));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 230, 30));
         jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 550, 440));
@@ -115,40 +105,43 @@ public class LOGIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-      
-       String user_name = username.getText().trim();
-    String Password = password.getText().trim();
-    connectDB connect = new connectDB();
+        
+     String user_name = username.getText().trim();
+String Password = password.getText().trim();
+connectDB connect = new connectDB();
 
-    if (user_name.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter your username!", "Error", JOptionPane.WARNING_MESSAGE);
-    } else if (Password.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter your password!", "Error", JOptionPane.WARNING_MESSAGE);
-    } else {
-        try {
-            String userType = connect.validateLogin(user_name, Password);
-            if (userType != null) {
-                JOptionPane.showMessageDialog(null, "Login Successful!");
+if (user_name.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Please enter your username!", "Error", JOptionPane.WARNING_MESSAGE);
+} else if (Password.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Please enter your password!", "Error", JOptionPane.WARNING_MESSAGE);
+} else {
+    try {
+        String userType = connect.validateLogin(user_name, Password);
+        
+        if (userType != null) {
+            JOptionPane.showMessageDialog(null, "Login Successful!");
 
-                switch (userType) {
-                    case "Manager":
-                        new ManagerDashboard().setVisible(true);
-                        break;
-                    case "Sales Clerk":
-                        new SalesClerkDashboard().setVisible(true);
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "Unknown user type: " + userType, "Error", JOptionPane.ERROR_MESSAGE);
-                        break;
-                }
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+            switch (userType.toUpperCase()) {
+                case "MANAGER":
+                    new ManagerDashboard().setVisible(true); // Fixed class name
+                    break;
+                case "SALES_CLERK": // Ensure this matches what validateLogin returns
+                    new SalesClerkDashboard().setVisible(true); // Use correct class name
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Unknown user type: " + userType, "Error", JOptionPane.ERROR_MESSAGE);
+                    break;
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+
+
         
     }//GEN-LAST:event_loginActionPerformed
 
@@ -197,7 +190,6 @@ public class LOGIN extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
@@ -206,6 +198,5 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel register_path;
     private javax.swing.JTextField username;
-    private javax.swing.JComboBox<String> usertype;
     // End of variables declaration//GEN-END:variables
 }

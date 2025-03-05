@@ -47,7 +47,7 @@ public class REGISTRATION extends javax.swing.JFrame {
         terms_policy = new javax.swing.JCheckBox();
         firstname = new javax.swing.JTextField();
         Email = new javax.swing.JTextField();
-        username = new javax.swing.JTextField();
+        un = new javax.swing.JTextField();
         lastname = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -142,7 +142,7 @@ public class REGISTRATION extends javax.swing.JFrame {
         jPanel1.add(terms_policy, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 240, -1));
         jPanel1.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 230, 30));
         jPanel1.add(Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 230, 30));
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 230, 30));
+        jPanel1.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 230, 30));
         jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 550, 500));
@@ -185,52 +185,53 @@ public class REGISTRATION extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
        
-        String First_name = firstname.getText().trim();
-        String Last_name = lastname.getText().trim();
-        String email = Email.getText().trim();
-        String User_type = usertype.getSelectedItem().toString();
-        String user_name = username.getText().trim();
-        String Password = password.getText().trim();
-        
-        connectDB connect = new connectDB();
-        
-        if (First_name.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Please Enter your First Name!", "Error", JOptionPane.WARNING_MESSAGE);
+  String First_name = firstname.getText().trim();
+String Last_name = lastname.getText().trim();
+String email = Email.getText().trim().toLowerCase();
+String User_type = usertype.getSelectedItem() != null ? usertype.getSelectedItem().toString().trim() : "";
+String user_name = un.getText().trim();
+String Password = password.getText().trim();
+
+connectDB connect = new connectDB();
+
+if (First_name.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Please enter your First Name!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (Last_name.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Please Enter your Last Name!", "Error", JOptionPane.WARNING_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Please enter your Last Name!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (email.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Please Enter an Email!", "Error", JOptionPane.WARNING_MESSAGE);
-} else if (usertype.getSelectedIndex()==0) {
+    JOptionPane.showMessageDialog(null, "Please enter an Email!", "Error", JOptionPane.WARNING_MESSAGE);
+} else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) { 
+    JOptionPane.showMessageDialog(null, "Please enter a valid Email Address!", "Error", JOptionPane.WARNING_MESSAGE);
+} else if (User_type.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Please select a User Type!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (user_name.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Please Enter a Username!", "Error", JOptionPane.WARNING_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Please enter a Username!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (Password.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Please Enter a Password!", "Error", JOptionPane.WARNING_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Please enter a Password!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (Password.length() < 8) {
     JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!", "Error", JOptionPane.WARNING_MESSAGE);
 } else {
     try {
+        // Check if email or username already exists
         if (connect.fieldExists("username", user_name)) {
             JOptionPane.showMessageDialog(null, "Username already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-        } else if (connect.fieldExists("Email", email)) {
+        } else if (connect.fieldExists("email", email)) { // Ensure the column name matches the database
             JOptionPane.showMessageDialog(null, "Email already used!", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
-            connect.insertData("INSERT INTO `users` (firstname, lastname, email, usertype, username, password) VALUES ('"
-                    + First_name + "','" + Last_name + "','" + email+ "','" + User_type+ "','" + user_name+ "','" + Password + "')");
+            // Proper SQL insert with default status as 'Pending'
+            String sql = "INSERT INTO users (firstname, lastname, username, email, usertype, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            int rowsInserted = connect.insertData(sql, First_name, Last_name, user_name, email, User_type, Password, "Pending");
+
             JOptionPane.showMessageDialog(null, "Registered Successfully!");
 
-            if (User_type.equals("Manager")) {
-                new ManagerDashboard();
-            } else if (User_type.equals("Sales Clerk")) {
-                new SalesClerkDashboard();
-            }
+            new LOGIN().setVisible(true);
             this.dispose();
         }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        
+    }
+}
+
     }//GEN-LAST:event_registerActionPerformed
 
     private void terms_policyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terms_policyActionPerformed
@@ -313,7 +314,7 @@ public class REGISTRATION extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JButton register;
     private javax.swing.JCheckBox terms_policy;
-    private javax.swing.JTextField username;
+    private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> usertype;
     // End of variables declaration//GEN-END:variables
 }
