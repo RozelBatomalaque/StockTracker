@@ -1,11 +1,6 @@
 package config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class connectDB {
     private Connection connect;
@@ -17,33 +12,32 @@ public class connectDB {
             System.out.println("Connected to the database successfully!");
         } catch (SQLException ex) {
             System.out.println("Can't connect to database: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
-    // Function to save data
-    public int insertData(String sql, Object... params) {
-        int result = 0;
+    // Insert Data (Uses PreparedStatement for Security)
+    public int insertData(String sql, Object... params) throws SQLException {
         try (PreparedStatement pst = connect.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 pst.setObject(i + 1, params[i]);
             }
-            result = pst.executeUpdate();
-            System.out.println("Inserted Successfully!");
-        } catch (SQLException ex) {
-            System.out.println("Connection Error: " + ex.getMessage());
+            return pst.executeUpdate();
         }
-        return result;
     }
 
-    // Function to retrieve data
-    public ResultSet getData(String sql) throws SQLException {
-        Statement stmt = connect.createStatement();
-        return stmt.executeQuery(sql);
+    // Retrieve Data Securely
+    public ResultSet getData(String sql, Object... params) throws SQLException {
+        PreparedStatement stmt = connect.prepareStatement(sql);
+        for (int i = 0; i < params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+        return stmt.executeQuery();
     }
 
-    // Function to check if a field exists
-    public boolean fieldExists(String fieldName, String value) throws SQLException {
-        String sql = "SELECT 1 FROM `users` WHERE " + fieldName + " = ?";
+    // Check if a field exists
+    public boolean fieldExists(String tableName, String fieldName, String value) throws SQLException {
+        String sql = "SELECT 1 FROM " + tableName + " WHERE " + fieldName + " = ?";
         try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
             pstmt.setString(1, value);
             ResultSet result = pstmt.executeQuery();
@@ -51,22 +45,28 @@ public class connectDB {
         }
     }
 
-    // Function to validate login
+    // Validate login securely with password hashing
     public String validateLogin(String username, String password) throws SQLException {
-        String query = "SELECT usertype FROM users WHERE username = ? AND password = ?";
+        String query = "SELECT usertype, password FROM users WHERE username = ?";
         try (PreparedStatement stmt = connect.prepareStatement(query)) {
             stmt.setString(1, username);
-            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
+            
             if (rs.next()) {
-                return rs.getString("usertype");
+                String storedHashedPassword = rs.getString("password");
+                try {
+                    if (passwordHasher.checkPassword(password, storedHashedPassword)) {
+                        return rs.getString("usertype"); // Return usertype if password matches
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-        return null;
+        return null; // Return null if login fails
     }
 
-    // Close the connection
-    public void closeConnection() {
+   public void closeConnection() {
         try {
             if (connect != null && !connect.isClosed()) {
                 connect.close();
@@ -76,20 +76,34 @@ public class connectDB {
             System.out.println("Error closing connection: " + ex.getMessage());
         }
     }
-    
-    //Function to save data
-        public int insertData(String sql){
-            int result;
-            try{
-                PreparedStatement pst = connect.prepareStatement(sql);
-                pst.executeUpdate();
-                System.out.println("Inserted Successfully!");
-                pst.close();
-                result =1;
-            }catch(SQLException ex){
-                System.out.println("Connection Error: "+ex);
-                result =0;
+    // Update Data
+    public int updateData(String sql, Object... params) throws SQLException {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                pst.setObject(i + 1, params[i]);
             }
-            return result;
+            return pst.executeUpdate();
         }
+    }
+
+    // Check for duplicates (excluding current record)
+    public boolean duplicateCheckExcludingCurrent(String tableName, String columnName, String value, String idColumn, String idValue) {
+        String sql = "SELECT 1 FROM " + tableName + " WHERE " + columnName + " = ? AND " + idColumn + " <> ?";
+        try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
+            pstmt.setString(1, value);
+            pstmt.setString(2, idValue);
+            ResultSet result = pstmt.executeQuery();
+            return result.next();
+        } catch (SQLException ex) {
+            System.out.println("Database Error: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    // Get connection for external use
+    public Connection getConnection() {
+        return connect;
+    }
+    
 }

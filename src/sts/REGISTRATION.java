@@ -6,8 +6,11 @@
 package sts;
 
 import config.connectDB;
+import config.passwordHasher;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -88,7 +91,12 @@ public class REGISTRATION extends javax.swing.JFrame {
         });
         jPanel1.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 104, 32));
 
-        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User ", "Manager", "Sales Clerk", " " }));
+        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Sales Clerk" }));
+        usertype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usertypeActionPerformed(evt);
+            }
+        });
         jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 230, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/r1.png"))); // NOI18N
@@ -184,11 +192,10 @@ public class REGISTRATION extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-       
   String First_name = firstname.getText().trim();
 String Last_name = lastname.getText().trim();
 String email = Email.getText().trim().toLowerCase();
-String User_type = usertype.getSelectedItem() != null ? usertype.getSelectedItem().toString().trim() : "";
+String User_type = usertype.getSelectedItem().toString().trim();
 String user_name = un.getText().trim();
 String Password = password.getText().trim();
 
@@ -200,7 +207,7 @@ if (First_name.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Please enter your Last Name!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (email.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Please enter an Email!", "Error", JOptionPane.WARNING_MESSAGE);
-} else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) { 
+} else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
     JOptionPane.showMessageDialog(null, "Please enter a valid Email Address!", "Error", JOptionPane.WARNING_MESSAGE);
 } else if (User_type.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Please select a User Type!", "Error", JOptionPane.WARNING_MESSAGE);
@@ -212,26 +219,34 @@ if (First_name.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!", "Error", JOptionPane.WARNING_MESSAGE);
 } else {
     try {
-        // Check if email or username already exists
-        if (connect.fieldExists("username", user_name)) {
+        if (connect.fieldExists("users", "username", user_name)) {
             JOptionPane.showMessageDialog(null, "Username already taken!", "Error", JOptionPane.WARNING_MESSAGE);
-        } else if (connect.fieldExists("email", email)) { // Ensure the column name matches the database
+        } else if (connect.fieldExists("users", "email", email)) {
             JOptionPane.showMessageDialog(null, "Email already used!", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
-            // Proper SQL insert with default status as 'Pending'
+            String hashedPassword = passwordHasher.hashPassword(password.getText());
+
             String sql = "INSERT INTO users (firstname, lastname, username, email, usertype, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            int rowsInserted = connect.insertData(sql, First_name, Last_name, user_name, email, User_type, Password, "Pending");
+            int rowsInserted = connect.insertData(sql, First_name, Last_name, user_name, email, User_type, hashedPassword, "Pending");
 
-            JOptionPane.showMessageDialog(null, "Registered Successfully!");
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(null, "Registered Successfully!");
 
-            new LOGIN().setVisible(true);
-            this.dispose();
+                new LOGIN().setVisible(true);
+
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(un);
+                if (frame != null) {
+                    frame.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Registration failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
+        e.printStackTrace();
         JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
-
     }//GEN-LAST:event_registerActionPerformed
 
     private void terms_policyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terms_policyActionPerformed
@@ -257,6 +272,10 @@ if (First_name.isEmpty()) {
         
         
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void usertypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usertypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usertypeActionPerformed
 
     /**
      * @param args the command line arguments

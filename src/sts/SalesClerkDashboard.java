@@ -5,6 +5,9 @@
  */
 package sts;
 
+import config.Session;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
@@ -27,6 +30,7 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        username = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,10 +44,23 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        login3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        userid = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        username.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        username.setText("User");
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(204, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -66,7 +83,7 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Baskerville Old Face", 1, 250)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("F");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 230));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 230));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,9 +140,50 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 0, 540, 80));
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/profile-removebg-preview.png"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
+
+        login3.setBackground(new java.awt.Color(51, 0, 51));
+        login3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        login3.setForeground(new java.awt.Color(255, 255, 255));
+        login3.setText("Account");
+        login3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(login3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 104, 32));
+
+        jLabel11.setText("Cuurent  ID: ");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
+
+        userid.setText("ID");
+        getContentPane().add(userid, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void login3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login3ActionPerformed
+        accountDetails ad = new accountDetails();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_login3ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+      Session sess = Session.getInstance();
+      
+      if(sess.getId()==0){
+          JOptionPane.showMessageDialog(null, "Please Log In First!");
+          LOGIN l = new LOGIN();
+          l.setVisible(true);
+          this.dispose();
+      }else{
+           userid.setText(""+sess.getId());
+          username.setText(""+sess.getFirstname());
+      }
+          
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -164,6 +222,7 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -173,8 +232,12 @@ public class SalesClerkDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton login3;
+    private javax.swing.JLabel userid;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

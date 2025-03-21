@@ -5,6 +5,9 @@
  */
 package sts;
 
+import config.Session;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrator
@@ -41,9 +44,17 @@ public class ManagerDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        accountname = new javax.swing.JLabel();
+        accountname1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 0, 153));
@@ -116,7 +127,18 @@ public class ManagerDashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 110, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 110, 60));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/profile-removebg-preview.png"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
+
+        accountname.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        accountname.setText("Admin");
+        getContentPane().add(accountname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
+
+        accountname1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        accountname1.setText("Admin");
+        getContentPane().add(accountname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -128,6 +150,22 @@ public class ManagerDashboard extends javax.swing.JFrame {
         u.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+        Session sess = Session.getInstance();
+        if(sess.getId()== 0){
+           JOptionPane.showMessageDialog(null,"Please Log in First!");
+           LOGIN l = new LOGIN();
+           l.setVisible(true);
+           this.dispose();
+        }else{
+            accountname.setText(""+sess.getFirstname());
+                 
+        }
+        
+        
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -165,6 +203,8 @@ public class ManagerDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accountname;
+    private javax.swing.JLabel accountname1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
@@ -176,6 +216,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
