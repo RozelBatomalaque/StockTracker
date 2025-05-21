@@ -105,5 +105,19 @@ public class connectDB {
     public Connection getConnection() {
         return connect;
     }
+    public boolean fieldExistsCustom(String sql, Object... params) {
+    try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
+        for (int i = 0; i < params.length; i++) {
+            pstmt.setObject(i + 1, params[i]);
+        }
+        ResultSet result = pstmt.executeQuery();
+        return result.next();
+    } catch (SQLException e) {
+        System.out.println("Database Error: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return false;
+}
+    
     
 }
