@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 09:06 AM
+-- Generation Time: May 21, 2025 at 04:06 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,19 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `usertype` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `security_question` varchar(255) NOT NULL,
+  `security_answer` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `usertype`, `username`, `password`, `security_question`, `security_answer`, `status`) VALUES
+(1, 'test', 'test', 'test@gmail.com', 'Manager', 'test', 'osltUY8QmaO2r+KeRDNA+fX98SiYU/wDSQhETyvLiYI=', 'What is your favorite Color?', 'red', 'active'),
+(2, 'ericson', 'bareno', 'ericson@gmail.com', 'Sales Clerk', 'ericson', '9fvG/oTDZTFfSR1CdcLy5dPGDyVoTh1i5+n+Y6v40Ng=', 'What is your favorite Color?', 'green', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -55,7 +66,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
