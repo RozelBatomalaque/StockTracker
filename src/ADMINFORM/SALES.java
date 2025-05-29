@@ -26,9 +26,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class SALES extends javax.swing.JFrame {
 
-    /**
-     * Creates new form USER
-     */
+   
     public SALES() {
         initComponents();
         displayData();
@@ -624,7 +622,7 @@ if (rowIndex < 0) {
     }//GEN-LAST:event_jLabel7MouseExited
 
     private void r1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r1MouseClicked
-       int rowIndex = ordersTable.getSelectedRow();
+ int rowIndex = ordersTable.getSelectedRow();
 
 if (rowIndex < 0) {
     JOptionPane.showMessageDialog(null, "Please Select An Item!");
@@ -634,20 +632,35 @@ if (rowIndex < 0) {
         connectDB cdb = new connectDB();
         TableModel tbl = ordersTable.getModel();
         
-        String iid = tbl.getValueAt(rowIndex, 0).toString();
+        Session sess = Session.getInstance();
         
-        ResultSet rs = cdb.getData("SELECT * FROM sales WHERE s_id = '" + iid + "'");
+        String s_id = tbl.getValueAt(rowIndex, 0).toString();  
+        
+        ResultSet rs = cdb.getData("SELECT * FROM sales WHERE s_id = '" + s_id + "'");
         
         if (rs.next()) {
-            a.s_id.setText(rs.getString("s_id")); 
+            String i_id = rs.getString("i_id");  
+            
+            a.s_id.setText(rs.getString("s_id"));   
             a.id.setText(rs.getString("id"));
-            a.i_id.setText(rs.getString("i_id"));          
+            a.i_id.setText(i_id);          
             a.quan.setText(rs.getString("quantity"));
             a.date.setText(rs.getString("date"));
-            a.stat.setText(rs.getString("status"));        
+            a.stat.setText(rs.getString("status"));   
+            a.USERN.setText(sess.getUsername());
+
+            ResultSet itemRS = cdb.getData("SELECT name, price FROM items WHERE i_id = '" + i_id + "'");
+            if (itemRS.next()) {
+                a.iname.setText(itemRS.getString("name"));
+                a.price.setText(itemRS.getString("price"));
+            } else {
+                a.iname.setText("Unknown");
+                a.price.setText("0.00");
+            }
+
             a.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "User data not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sales record not found!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     } catch (SQLException ex) {
@@ -655,6 +668,7 @@ if (rowIndex < 0) {
         JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
     }//GEN-LAST:event_r1MouseClicked
 
     private void r1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r1MouseEntered
@@ -737,4 +751,8 @@ if (rowIndex < 0) {
     private javax.swing.JLabel userid;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
+
+    private String cashier(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

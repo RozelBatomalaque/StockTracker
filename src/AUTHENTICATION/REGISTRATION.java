@@ -45,7 +45,6 @@ public class REGISTRATION extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
-        jLabel11 = new javax.swing.JLabel();
         firstname = new javax.swing.JTextField();
         Email = new javax.swing.JTextField();
         un = new javax.swing.JTextField();
@@ -54,12 +53,15 @@ public class REGISTRATION extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        o = new javax.swing.JPanel();
+        remove = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        sa = new javax.swing.JTextField();
-        sq = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        images = new javax.swing.JLabel();
+        select = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        o2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,18 +74,18 @@ public class REGISTRATION extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 102));
         jLabel1.setText("Firstname:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 102));
         jLabel3.setText("User Type:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("SIGN UP");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
         usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Sales Clerk" }));
         usertype.addActionListener(new java.awt.event.ActionListener() {
@@ -91,49 +93,44 @@ public class REGISTRATION extends javax.swing.JFrame {
                 usertypeActionPerformed(evt);
             }
         });
-        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 230, 30));
+        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 150, 30));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Lastname:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 0, 102));
         jLabel9.setText("Username:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 0, 102));
         jLabel10.setText("Email:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
 
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 230, 30));
-
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel11.setText("Security Question:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
-        jPanel1.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 230, 30));
-        jPanel1.add(Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 230, 30));
-        jPanel1.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, 30));
-        jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 230, 30));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 150, 30));
+        jPanel1.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 150, 30));
+        jPanel1.add(Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 30));
+        jPanel1.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, 30));
+        jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 150, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 0, 153));
-        jLabel2.setText("________________________");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 210, -1));
+        jLabel2.setText("_________________________________________");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 340, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fb 60.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, -1, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/google icon 50.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, 30));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 2, 12)); // NOI18N
         jLabel7.setText("Already have an account? Click Log in");
@@ -142,45 +139,84 @@ public class REGISTRATION extends javax.swing.JFrame {
                 jLabel7MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, 20));
 
-        o.setBackground(new java.awt.Color(51, 0, 51));
-        o.addMouseListener(new java.awt.event.MouseAdapter() {
+        remove.setBackground(new java.awt.Color(51, 0, 51));
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                oMouseClicked(evt);
+                removeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                oMouseEntered(evt);
+                removeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                oMouseExited(evt);
+                removeMouseExited(evt);
             }
         });
-        o.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        remove.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("REGISTER");
-        o.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
+        jLabel12.setText("Remove");
+        remove.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, -1));
 
-        jPanel1.add(o, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 150, 40));
-        jPanel1.add(sa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 230, 30));
-
-        sq.setText("What is your favorite Color?");
-        sq.setEnabled(false);
-        jPanel1.add(sq, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 230, 30));
+        jPanel1.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 100, 40));
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 0, 102));
         jLabel14.setText("Password:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel15.setText("Security Answer:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 570, 410));
+        images.setText("jLabel11");
+        jPanel2.add(images, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 200, 150));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 220, 160));
+
+        select.setBackground(new java.awt.Color(51, 0, 51));
+        select.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                selectMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                selectMouseExited(evt);
+            }
+        });
+        select.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Select");
+        select.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 20));
+
+        jPanel1.add(select, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 100, 40));
+
+        o2.setBackground(new java.awt.Color(51, 0, 51));
+        o2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                o2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                o2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                o2MouseExited(evt);
+            }
+        });
+        o2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("REGISTER");
+        o2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, -1));
+
+        jPanel1.add(o2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 110, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 660, 400));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login.png"))); // NOI18N
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 380, 420));
@@ -204,7 +240,7 @@ public class REGISTRATION extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void oMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_oMouseClicked
+    private void removeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseClicked
 
         String First_name = firstname.getText().trim();
         String Last_name = lastname.getText().trim();
@@ -212,8 +248,6 @@ public class REGISTRATION extends javax.swing.JFrame {
         String User_type = usertype.getSelectedItem().toString().trim();
         String user_name = un.getText().trim();
         String Password = password.getText().trim();
-        String Sec = sq.getText();
-        String Sa = sa.getText().toLowerCase();
         connectDB connect = new connectDB();
 
         if (First_name.isEmpty()) {
@@ -232,10 +266,6 @@ public class REGISTRATION extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please enter a Password!", "Error", JOptionPane.WARNING_MESSAGE);
         } else if (Password.length() < 8) {
             JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!", "Error", JOptionPane.WARNING_MESSAGE);
-        } else if(Sec.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please enter a Security Question!", "Error", JOptionPane.WARNING_MESSAGE);
-        }else if(Sa.isEmpty()){
-             JOptionPane.showMessageDialog(null, "Please enter a Security Answer!", "Error", JOptionPane.WARNING_MESSAGE);
         }else{
            
             try {
@@ -249,7 +279,7 @@ public class REGISTRATION extends javax.swing.JFrame {
                     String hashedPassword = passwordHasher.hashPassword(Password);
  
                     String sql = "INSERT INTO users (firstname, lastname, username, email, usertype, password, status, security_question, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    int rowsInserted = connect.insertData(sql, First_name, Last_name, user_name, email, User_type, hashedPassword, "Pending",Sec,Sa);
+                    int rowsInserted = connect.insertData(sql, First_name, Last_name, user_name, email, User_type, hashedPassword, "Pending");
 
                     if (rowsInserted > 0) {
                         JOptionPane.showMessageDialog(null, "Registered Successfully!");
@@ -270,15 +300,39 @@ public class REGISTRATION extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }    
-    }//GEN-LAST:event_oMouseClicked
+    }//GEN-LAST:event_removeMouseClicked
 
-    private void oMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_oMouseEntered
-        o.setBackground(new Color (153, 0 , 153));
-    }//GEN-LAST:event_oMouseEntered
+    private void removeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseEntered
+        remove.setBackground(new Color (153, 0 , 153));
+    }//GEN-LAST:event_removeMouseEntered
 
-    private void oMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_oMouseExited
-        o.setBackground(new Color (51,0,51));
-    }//GEN-LAST:event_oMouseExited
+    private void removeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseExited
+        remove.setBackground(new Color (51,0,51));
+    }//GEN-LAST:event_removeMouseExited
+
+    private void selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectMouseClicked
+
+    private void selectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectMouseEntered
+
+    private void selectMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectMouseExited
+
+    private void o2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_o2MouseClicked
+
+    private void o2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_o2MouseEntered
+
+    private void o2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_o2MouseExited
 
     /**
      * @param args the command line arguments
@@ -318,13 +372,14 @@ public class REGISTRATION extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Email;
     private javax.swing.JTextField firstname;
+    private javax.swing.JLabel images;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -334,11 +389,12 @@ public class REGISTRATION extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lastname;
-    private javax.swing.JPanel o;
+    private javax.swing.JPanel o2;
     private javax.swing.JPasswordField password;
-    private javax.swing.JTextField sa;
-    private javax.swing.JTextField sq;
+    private javax.swing.JPanel remove;
+    private javax.swing.JPanel select;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> usertype;
     // End of variables declaration//GEN-END:variables

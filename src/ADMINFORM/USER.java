@@ -435,6 +435,7 @@ if (rowIndex < 0) {
             a.un.setText(rs.getString("username"));
             a.Email.setText(rs.getString("email"));
             a.password.setText(rs.getString("password"));
+          
             
             String userStatus = rs.getString("status");
             String userType = rs.getString("usertype");
@@ -444,6 +445,21 @@ if (rowIndex < 0) {
 
             a.add.setEnabled(true);
             a.update.setEnabled(false);
+            a.images.setIcon(a.ResizeImage(rs.getString("images"), null, a.images));
+                    a.oldpath = rs.getString("images");
+                    a.path = rs.getString("images");
+                    a.destination = rs.getString("images");
+                    a.add.setEnabled(false);
+                    a.update.setEnabled(true);
+                    a.password.setEnabled(false);
+
+                    if(rs.getString("images").isEmpty()){
+                        a.select.setEnabled(true);
+                        a.remove.setEnabled(false);
+                    }else{
+                        a.select.setEnabled(false);
+                        a.remove.setEnabled(true);
+                    }
             
             a.setVisible(true);
         } else {

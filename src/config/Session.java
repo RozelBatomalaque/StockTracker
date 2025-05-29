@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package config;
 
-/**
- *
- * @author Administrator
- */
 public class Session {
-    
+
     private static Session instance;
     private int id;
     private String firstname;
@@ -19,16 +10,14 @@ public class Session {
     private String usertype;
     private String username;
     private String status;
-  
-    private Session(){
-        // Private cons.prevents instance
-    }
+
+    private Session() {}
 
     public static synchronized Session getInstance() {
-      if(instance == null){
-          instance = new Session();
-      }
-      return instance;  
+        if (instance == null) {
+            instance = new Session();
+        }
+        return instance;
     }
 
     public static boolean isInstanceEmpty() {
@@ -40,11 +29,9 @@ public class Session {
     }
 
     public void setId(int id) {
-        if(id > 0){
-            
-             this.id = id;
+        if (id > 0) {
+            this.id = id;
         }
-       
     }
 
     public String getFirstname() {
@@ -94,5 +81,4 @@ public class Session {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

@@ -64,6 +64,7 @@ public static boolean loginAcc(String username, String password) throws NoSuchAl
                 sess.setUsertype(resultSet.getString("usertype"));
                 sess.setUsername(resultSet.getString("username"));
                 sess.setStatus(resultSet.getString("status"));
+                
 
                 return true; // Login successful
             }
@@ -101,7 +102,7 @@ public static boolean loginAcc(String username, String password) throws NoSuchAl
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 400));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 400));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
